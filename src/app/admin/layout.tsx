@@ -1,14 +1,8 @@
 import Link from "next/link";
-import { redirect } from "next/navigation";
+import Image from "next/image";
 import { createServerSupabase } from "@/lib/supabase/server";
 import AdminLogoutButton from "@/components/AdminLogoutButton";
-
-const navItems = [
-  { href: "/admin", label: "Dashboard" },
-  { href: "/admin/orders", label: "Orders" },
-  { href: "/admin/products", label: "Products" },
-  { href: "/admin/settings", label: "Settings" },
-];
+import AdminNav from "@/components/AdminNav";
 
 export default async function AdminLayout({ children }: { children: React.ReactNode }) {
   const supabase = createServerSupabase();
@@ -37,18 +31,29 @@ export default async function AdminLayout({ children }: { children: React.ReactN
 
   return (
     <div className="flex min-h-[80vh] flex-col bg-earth-50 sm:flex-row">
-      <aside className="flex flex-shrink-0 flex-row items-center justify-between gap-2 border-b border-earth-100 bg-white p-4 sm:w-56 sm:flex-col sm:items-stretch sm:border-b-0 sm:border-r sm:p-6">
-        <div>
-          <p className="mb-4 hidden font-serif text-lg font-bold text-earth-700 sm:block">Pritam&apos;s Admin</p>
-          <nav className="flex gap-2 sm:flex-col">
-            {navItems.map((item) => (
-              <Link key={item.href} href={item.href} className="rounded-lg px-3 py-2 text-sm font-medium text-earth-600 hover:bg-earth-100">
-                {item.label}
-              </Link>
-            ))}
-          </nav>
+      <aside className="flex flex-shrink-0 flex-col gap-4 border-b border-earth-100 bg-white p-4 sm:w-60 sm:border-b-0 sm:border-r sm:p-6">
+        <Link href="/" target="_blank" className="flex items-center gap-2">
+          <Image src="/logo.png" alt="Pritam's" width={36} height={36} className="rounded-full" />
+          <div>
+            <p className="font-serif text-base font-bold text-earth-700">Pritam&apos;s Admin</p>
+            <p className="text-xs text-earth-400">{admin.full_name || user.email}</p>
+          </div>
+        </Link>
+
+        <AdminNav />
+
+        <a
+          href="/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium text-earth-500 hover:bg-earth-100"
+        >
+          <span aria-hidden>🔗</span> View Storefront
+        </a>
+
+        <div className="sm:mt-auto">
+          <AdminLogoutButton />
         </div>
-        <AdminLogoutButton />
       </aside>
       <main className="flex-1 p-4 sm:p-8">{children}</main>
     </div>
