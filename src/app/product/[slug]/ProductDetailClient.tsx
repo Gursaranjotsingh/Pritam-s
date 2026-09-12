@@ -5,14 +5,8 @@ import { useRouter } from "next/navigation";
 import { useCart } from "@/lib/cart-context";
 import { formatINR } from "@/lib/money";
 import { buildWhatsAppLink } from "@/lib/whatsapp";
+import SpiceLevel from "@/components/SpiceLevel";
 import type { Product } from "@/lib/types";
-
-const spiceLabels: Record<string, string> = {
-  mild: "Mild",
-  medium: "Medium",
-  hot: "Hot",
-  extra_hot: "Extra Hot",
-};
 
 export default function ProductDetailClient({ product }: { product: Product }) {
   const { addItem } = useCart();
@@ -77,9 +71,9 @@ export default function ProductDetailClient({ product }: { product: Product }) {
           )}
         </div>
 
-        <div className="mt-3 flex flex-wrap gap-2 text-xs">
+        <div className="mt-3 flex flex-wrap items-center gap-2 text-xs">
           {product.weight_grams && <span className="rounded-full bg-earth-100 px-3 py-1 text-earth-600">{product.weight_grams} g</span>}
-          <span className="rounded-full bg-earth-100 px-3 py-1 text-earth-600">Spice level: {spiceLabels[product.spice_level] ?? product.spice_level}</span>
+          <span className="rounded-full bg-earth-100 px-3 py-1"><SpiceLevel level={product.spice_level} /></span>
           {!soldOut && available > 0 && available <= (product.inventory?.low_stock_threshold ?? 5) && (
             <span className="rounded-full bg-spice-500 px-3 py-1 font-semibold text-white">Only {available} jar{available === 1 ? "" : "s"} left</span>
           )}
@@ -89,9 +83,17 @@ export default function ProductDetailClient({ product }: { product: Product }) {
         {product.description && <p className="mt-3 whitespace-pre-line text-sm text-earth-500">{product.description}</p>}
 
         {product.ingredients && (
-          <div className="mt-5">
-            <h3 className="text-sm font-semibold text-earth-700">Ingredients</h3>
-            <p className="mt-1 text-sm text-earth-500">{product.ingredients}</p>
+          <div className="mt-5 rounded-xl2 border border-earth-100 bg-earth-50/60 p-4">
+            <h3 className="flex items-center gap-2 text-sm font-semibold text-earth-700">
+              <span aria-hidden>🌿</span> Ingredients
+            </h3>
+            <div className="mt-2 flex flex-wrap gap-2">
+              {product.ingredients.split(",").map((ing, i) => (
+                <span key={i} className="rounded-full bg-white px-3 py-1 text-xs text-earth-600 shadow-sm">
+                  {ing.trim()}
+                </span>
+              ))}
+            </div>
           </div>
         )}
 
