@@ -311,12 +311,16 @@ create policy "admins can see admin_users" on admin_users for select
 -- SEED: four starter products (Aam / Nimbu / Mirch / Mix Achaar)
 -- Prices/weights are PLACEHOLDERS — edit in Admin → Products.
 -- =====================================================================
+-- Ingredient lists below reflect typical, traditional recipes for each
+-- achaar type — a sensible starting point. Edit them in Admin → Products
+-- to exactly match your own recipe (quantities, brand of oil, any spices
+-- you add or leave out, etc.) before you consider them final.
 insert into products (slug, name, short_description, description, ingredients, spice_level, weight_grams, price_paise, max_qty_per_order, status, is_featured, sort_order)
 values
-  ('aam-achaar', 'Aam Achaar', 'Tangy raw mango pickle, made the traditional way.', 'Placeholder description — replace with your own story about how this achaar is made at home.', 'Placeholder — e.g. raw mango, mustard oil, spices (edit in admin)', 'medium', 400, 24900, 10, 'active', true, 1),
-  ('nimbu-achaar', 'Nimbu Achaar', 'Classic sun-pickled lemon achaar.', 'Placeholder description — replace with your own story about how this achaar is made at home.', 'Placeholder — e.g. lemon, salt, spices (edit in admin)', 'mild', 400, 22900, 10, 'active', true, 2),
-  ('mirch-achaar', 'Mirch Achaar', 'Fiery green chilli achaar with mustard.', 'Placeholder description — replace with your own story about how this achaar is made at home.', 'Placeholder — e.g. green chilli, mustard, spices (edit in admin)', 'hot', 350, 24900, 10, 'active', true, 3),
-  ('mix-achaar', 'Mix Achaar', 'A homely blend of seasonal vegetables.', 'Placeholder description — replace with your own story about how this achaar is made at home.', 'Placeholder — e.g. mixed vegetables, mustard oil, spices (edit in admin)', 'medium', 400, 26900, 10, 'active', true, 4)
+  ('aam-achaar', 'Aam Achaar', 'Tangy raw mango pickle, made the traditional way.', 'Made at home the traditional way — raw mangoes hand-cut and mixed with mustard oil and whole spices, then left to mature for that deep, tangy household flavour.', 'Raw mango, mustard oil, red chilli powder, fenugreek seeds (methi), mustard seeds (rai), fennel seeds (saunf), turmeric powder, asafoetida (hing), salt', 'medium', 400, 24900, 10, 'active', true, 1),
+  ('nimbu-achaar', 'Nimbu Achaar', 'Classic sun-pickled lemon achaar.', 'Whole lemons pickled the traditional way and sun-cured with salt and warm spices for a tangy, mouth-watering achaar that softens beautifully over time.', 'Lemon, salt, red chilli powder, turmeric powder, mustard oil, fenugreek seeds (methi), mustard seeds (rai), asafoetida (hing), black salt (kala namak)', 'mild', 400, 22900, 10, 'active', true, 2),
+  ('mirch-achaar', 'Mirch Achaar', 'Fiery green chilli achaar with mustard.', 'Fresh green chillies slit and packed with a bold mustard-seed masala — a fiery, tangy achaar for those who like real heat with their meal.', 'Green chilli, mustard oil, mustard seeds (rai), fennel seeds (saunf), fenugreek seeds (methi), turmeric powder, salt, lemon juice, asafoetida (hing)', 'hot', 350, 24900, 10, 'active', true, 3),
+  ('mix-achaar', 'Mix Achaar', 'A homely blend of seasonal vegetables.', 'A homely mix of raw mango and seasonal vegetables, pickled together in mustard oil and traditional spices for a well-rounded, everyday achaar.', 'Raw mango, carrot, turnip, cauliflower, green chilli, mustard oil, mustard seeds (rai), fenugreek seeds (methi), fennel seeds (saunf), turmeric powder, red chilli powder, salt', 'medium', 400, 26900, 10, 'active', true, 4)
 on conflict (slug) do nothing;
 
 insert into inventory (product_id, quantity_available, low_stock_threshold)
