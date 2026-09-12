@@ -17,7 +17,6 @@ export default function OurStoryPage() {
           families, made with the same care as it always has been.
         </p>
         <p className="mt-4 text-sm text-earth-400">
-          (Placeholder story — replace with your own words, family history and photos.)
         </p>
         <Link href="/shop" className="btn-primary mt-8 inline-flex">Shop Achaar</Link>
       </div>
