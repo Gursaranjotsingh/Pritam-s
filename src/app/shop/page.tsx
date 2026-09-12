@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { getActiveProducts } from "@/lib/products";
 import ProductCard from "@/components/ProductCard";
+import Reveal from "@/components/Reveal";
 
 export const metadata: Metadata = {
   title: "Shop All Achaar",
@@ -22,8 +23,10 @@ export default async function ShopPage() {
         <p className="text-center text-earth-500">No products available right now. Please check back soon!</p>
       ) : (
         <div className="grid grid-cols-2 gap-4 sm:gap-6 lg:grid-cols-4">
-          {products.map((p) => (
-            <ProductCard key={p.id} product={p} />
+          {products.map((p, i) => (
+            <Reveal key={p.id} delay={i * 60}>
+              <ProductCard product={p} />
+            </Reveal>
           ))}
         </div>
       )}
