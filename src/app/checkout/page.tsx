@@ -14,6 +14,51 @@ declare global {
   }
 }
 
+// This store currently ships within India only (checkout validation is
+// India-specific: 10-digit mobile numbers, 6-digit PIN codes). Country is
+// shown as a fixed field for clarity rather than a free-choice dropdown —
+// if international shipping is added later, this is the place to expand it.
+const COUNTRY = "India";
+
+const INDIAN_STATES = [
+  "Andaman and Nicobar Islands",
+  "Andhra Pradesh",
+  "Arunachal Pradesh",
+  "Assam",
+  "Bihar",
+  "Chandigarh",
+  "Chhattisgarh",
+  "Dadra and Nagar Haveli and Daman and Diu",
+  "Delhi",
+  "Goa",
+  "Gujarat",
+  "Haryana",
+  "Himachal Pradesh",
+  "Jammu and Kashmir",
+  "Jharkhand",
+  "Karnataka",
+  "Kerala",
+  "Ladakh",
+  "Lakshadweep",
+  "Madhya Pradesh",
+  "Maharashtra",
+  "Manipur",
+  "Meghalaya",
+  "Mizoram",
+  "Nagaland",
+  "Odisha",
+  "Puducherry",
+  "Punjab",
+  "Rajasthan",
+  "Sikkim",
+  "Tamil Nadu",
+  "Telangana",
+  "Tripura",
+  "Uttar Pradesh",
+  "Uttarakhand",
+  "West Bengal",
+];
+
 const initialForm = {
   name: "",
   phone: "",
@@ -199,12 +244,22 @@ export default function CheckoutPage() {
             <Field label="Address Line 2 (optional)">
               <input className="input" value={form.address_line2} onChange={(e) => updateField("address_line2", e.target.value)} />
             </Field>
+            <Field label="Country">
+              <select className="input" value={COUNTRY} disabled>
+                <option value={COUNTRY}>{COUNTRY}</option>
+              </select>
+            </Field>
             <div className="grid gap-4 sm:grid-cols-3">
               <Field label="City" error={errors.city}>
                 <input className="input" value={form.city} onChange={(e) => updateField("city", e.target.value)} />
               </Field>
               <Field label="State" error={errors.state}>
-                <input className="input" value={form.state} onChange={(e) => updateField("state", e.target.value)} />
+                <select className="input" value={form.state} onChange={(e) => updateField("state", e.target.value)}>
+                  <option value="">Select state</option>
+                  {INDIAN_STATES.map((s) => (
+                    <option key={s} value={s}>{s}</option>
+                  ))}
+                </select>
               </Field>
               <Field label="PIN Code" error={errors.pincode}>
                 <input className="input" value={form.pincode} onChange={(e) => updateField("pincode", e.target.value)} inputMode="numeric" maxLength={6} />
