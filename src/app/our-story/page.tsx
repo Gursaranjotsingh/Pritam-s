@@ -16,8 +16,6 @@ export default function OurStoryPage() {
           We started Pritam&apos;s so that this taste — the taste of an Indian household — could reach more
           families, made with the same care as it always has been.
         </p>
-        <p className="mt-4 text-sm text-earth-400">
-        </p>
         <Link href="/shop" className="btn-primary mt-8 inline-flex">Shop Achaar</Link>
       </div>
     </div>
