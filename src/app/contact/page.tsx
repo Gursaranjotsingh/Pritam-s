@@ -19,9 +19,6 @@ export default function ContactPage() {
         >
           Chat on WhatsApp
         </a>
-        <p className="mt-6 text-sm text-earth-400">
-          You can also add an email address and business hours here from Admin → Settings.
-        </p>
       </div>
     </div>
   );
