@@ -15,10 +15,6 @@ export default function AboutPage() {
           We&apos;re a small, home-based startup — not a large factory. We make in small batches, pack each order
           carefully, and try to bring you the same achaar we grew up eating at home.
         </p>
-        <p className="mt-4 text-sm text-earth-400">
-          (Replace this placeholder copy from Admin → Settings with your own detailed story, photos and any
-          verified claims you&apos;d like to add.)
-        </p>
       </div>
     </div>
   );
